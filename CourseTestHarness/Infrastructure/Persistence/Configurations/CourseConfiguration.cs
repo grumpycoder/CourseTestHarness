@@ -10,7 +10,7 @@ public class CourseConfiguration: IEntityTypeConfiguration<Course>
     public void Configure(EntityTypeBuilder<Course> builder)
     {
         builder.ToTable("Courses", "Common");
-        builder.Property(s => s.CourseName).HasColumnName("CourseName");
+        builder.Property(s => s.Name).HasColumnName("CourseName");
         builder.Property(s => s.CourseNumber).HasColumnName("CourseNumber");
         builder.Property(s => s.Description).HasColumnName("CourseDescription");
 
@@ -31,4 +31,13 @@ public class CourseConfiguration: IEntityTypeConfiguration<Course>
         // builder.Property(e => e.Status).HasConversion<string>();
     }
     
+}
+
+public class SubjectConfiguration : IEntityTypeConfiguration<Subject>
+{
+    public void Configure(EntityTypeBuilder<Subject> builder)
+    {
+        builder.ToTable("Subjects", "Common");
+        builder.Property(s => s.Name).HasColumnName("SubjectName");
+    }
 }
