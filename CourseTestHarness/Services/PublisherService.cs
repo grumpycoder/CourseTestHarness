@@ -19,9 +19,9 @@ public class PublisherService
         _settings = settings;
     }
 
-    public string BearerToken { get; set; }
-    public DateTime TokenExpiration { get; set; }
-    public bool TokenHasExpired => TokenExpiration <= DateTime.Now.AddMinutes(-5);
+    private string BearerToken { get; set; }
+    private DateTime TokenExpiration { get; set; }
+    private bool TokenHasExpired => TokenExpiration <= DateTime.Now.AddMinutes(-5);
 
     public async Task<BaseResponse> PublishCourse(Course course)
     {
@@ -42,7 +42,7 @@ public class PublisherService
         try
         {
             var post = await _settings.ApiRequestUrl
-                .AppendPathSegment("ws/schema/table/u_def_courses")
+                .AppendPathSegment(_settings.PublishEndPointUrl)
                 .WithOAuthBearerToken(BearerToken)
                 .WithHeader("Content-Type", "application/json")
                 .PostJsonAsync(container)
@@ -66,8 +66,7 @@ public class PublisherService
     private async Task GetBearerToken(string apiRequestUrl, string pluginClientId, string clientSecret)
     {
         var url = apiRequestUrl;
-        var config = new ApiSettings();
-        
+
         var result = await url
             .AppendPathSegment(Uri.EscapeUriString("oauth/access_token"))
             .SetQueryParam("grant_type", "client_credentials")

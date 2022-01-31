@@ -29,6 +29,8 @@ public class CourseConfiguration: IEntityTypeConfiguration<Course>
         //     ); 
         //
         // builder.Property(e => e.Status).HasConversion<string>();
+
+
     }
     
 }

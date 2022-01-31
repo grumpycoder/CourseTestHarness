@@ -4,7 +4,7 @@ namespace CourseTestHarness.Contracts;
 
  internal class JsonMessage
     {
-        public string Message { get; set; }
+        public string Message { get; set; } = string.Empty;
     }
 
     [JsonObject(IsReference = false, Title = "u_def_courses")]
@@ -52,7 +52,7 @@ namespace CourseTestHarness.Contracts;
     [JsonObject(IsReference = false)]
     public class Tables
     {
-        [JsonProperty("u_def_courses")] public UDefCourses UDefCourses { get; set; }
+        [JsonProperty("u_def_courses")] public UDefCourses UDefCourses { get; set; } = new();
     }
 
     [JsonObject(IsReference = false)]
@@ -60,7 +60,7 @@ namespace CourseTestHarness.Contracts;
     {
         [JsonProperty("id")] public int Id { get; set; }
 
-        [JsonProperty("name")] public string Name { get; set; }
+        [JsonProperty("name")] public string Name { get; set; } = string.Empty; 
 
-        [JsonProperty("tables")] public Tables Tables { get; set; }
+        [JsonProperty("tables")] public Tables Tables { get; set; } = new(); 
     }

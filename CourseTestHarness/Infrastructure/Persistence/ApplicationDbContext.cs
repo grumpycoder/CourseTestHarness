@@ -2,7 +2,6 @@ using System.Reflection;
 using CourseTestHarness.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Protocols;
 
 namespace CourseTestHarness.Infrastructure.Persistence;
 
@@ -13,9 +12,9 @@ public class ApplicationDbContext: DbContext
 
     public ApplicationDbContext()
     {
-        IConfigurationBuilder builder = new ConfigurationBuilder()
+        var builder = new ConfigurationBuilder()
             .SetBasePath(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location))
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            .AddJsonFile("appsettings.json", false, true);
         _iConfiguration = builder.Build();
         _connectionString = _iConfiguration.GetConnectionString("DefaultConnection");
     }
